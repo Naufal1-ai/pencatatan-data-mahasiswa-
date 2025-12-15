@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include '../koneksi.php';
 
 // PROSES SIMPAN DATA
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
-                                <a href="index.php" class="btn btn-secondary">Kembali</a>
+                                <a href="cd../index.php" class="btn btn-secondary">Kembali</a>
                             </div>
                         </form>
                     </div>

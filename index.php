@@ -52,7 +52,7 @@ include 'koneksi.php';
     <!-- Content -->
     <div class="container mt-5">
         <h2 class="mb-4">Data Mahasiswa</h2>
-        <a href="tambah.php" class="btn btn-primary mb-3">
+        <a href="mahasiswa/tambah.php" class="btn btn-primary mb-3">
             <i class="bi bi-plus-circle"></i> Tambah Data Baru
         </a>
 
@@ -84,10 +84,10 @@ include 'koneksi.php';
                                 <td><?php echo date('d-m-Y', strtotime($data['tgl_lahir'])); ?></td>
                                 <td><?php echo $data['alamat']; ?></td>
                                 <td>
-                                    <a href="edit.php?nim=<?php echo $data['nim']; ?>" class="btn btn-warning btn-sm">
+                                    <a href="mahasiswa/edit.php?nim=<?php echo $data['nim']; ?>" class="btn btn-warning btn-sm">
                                         Edit
                                     </a>
-                                    <a href="delete.php?nim=<?php echo $data['nim']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data <?php echo $data['nama_mhs']; ?>?')">
+                                    <a href="dmahasiswa/delete.php?nim=<?php echo $data['nim']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data <?php echo $data['nama_mhs']; ?>?')">
                                         Hapus
                                     </a>
                                 </td>

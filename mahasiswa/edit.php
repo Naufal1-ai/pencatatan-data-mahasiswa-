@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include '../koneksi.php';
 
 // Ambil NIM dari URL
 $nim = $_GET['nim'];
