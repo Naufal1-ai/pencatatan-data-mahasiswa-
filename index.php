@@ -87,7 +87,7 @@ include 'koneksi.php';
                                     <a href="mahasiswa/edit.php?nim=<?php echo $data['nim']; ?>" class="btn btn-warning btn-sm">
                                         Edit
                                     </a>
-                                    <a href="dmahasiswa/delete.php?nim=<?php echo $data['nim']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data <?php echo $data['nama_mhs']; ?>?')">
+                                    <a href="mahasiswa/delete.php?nim=<?php echo $data['nim']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data <?php echo $data['nama_mhs']; ?>?')">
                                         Hapus
                                     </a>
                                 </td>
