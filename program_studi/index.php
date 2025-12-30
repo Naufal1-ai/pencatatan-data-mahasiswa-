@@ -1,78 +1,57 @@
 <?php
-$title = "Data Program Studi - Sistem Pencatatan Data Mahasiswa";
-include '../layout/header.php';
+session_start();
+require __DIR__ . '/../koneksi.php';
 
-// Include koneksi database
-require '../koneksi.php';
-
-// Query untuk mengambil data program studi
-try {
-    $sql = "SELECT * FROM program_studi ORDER BY id DESC";
-    $stmt = $pdo->query($sql);
-    $program_studi = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    $program_studi = [];
-    $error_message = "Error: " . $e->getMessage();
+// proteksi login
+if (!isset($_SESSION['login'])) {
+    header("Location: ../login.php");
+    exit;
 }
+
+$title = "Program Studi";
+require __DIR__ . '/../layout/header.php';
+
+// tambah data
+if (isset($_POST['simpan'])) {
+    $nama_prodi = mysqli_real_escape_string($koneksi, $_POST['nama_prodi']);
+    mysqli_query(
+        $koneksi,
+        "INSERT INTO program_studi (nama_prodi) VALUES ('$nama_prodi')"
+    );
+    header("Location: index.php");
+    exit;
+}
+
+$data = mysqli_query($koneksi, "SELECT * FROM program_studi");
 ?>
 
-<div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold"><i class="bi bi-book-fill"></i> Data Program Studi</h2>
-        <a href="tambah.php" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Tambah Program Studi
-        </a>
-    </div>
+<div class="container mt-4">
+    <h3>Data Program Studi</h3>
 
-    <?php if (isset($error_message)): ?>
-        <div class="alert alert-danger"><?php echo $error_message; ?></div>
-    <?php endif; ?>
-
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Program Studi</th>
-                            <th>Jenjang</th>
-                            <th>Akreditasi</th>
-                            <th>Keterangan</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (count($program_studi) > 0): ?>
-                            <?php $no = 1;
-                            foreach ($program_studi as $ps): ?>
-                                <tr>
-                                    <td><?php echo $no++; ?></td>
-                                    <td><?php echo htmlspecialchars($ps['nama_prodi'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($ps['jenjang'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($ps['akreditasi'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($ps['keterangan'] ?? '-'); ?></td>
-                                    <td>
-                                        <a href="edit.php?id=<?php echo $ps['id']; ?>" class="btn btn-warning btn-sm">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <a href="hapus.php?id=<?php echo $ps['id']; ?>" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin ingin menghapus?')">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="6" class="text-center">Tidak ada data program studi</td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
+    <form method="post" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="nama_prodi" class="form-control" placeholder="Nama Program Studi" required>
+            <button type="submit" name="simpan" class="btn btn-primary">Tambah</button>
         </div>
-    </div>
+    </form>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Program Studi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $no = 1; ?>
+            <?php while ($row = mysqli_fetch_assoc($data)) : ?>
+                <tr>
+                    <td><?= $no++ ?></td>
+                    <td><?= htmlspecialchars($row['nama_prodi']) ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
 </div>
 
-<?php include '../layout/footer.php'; ?>
+<?php require __DIR__ . '/../layout/footer.php'; ?>

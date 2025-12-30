@@ -1,10 +1,10 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "db_akademik";
-
-$koneksi = mysqli_connect($host, $user, $pass, $db);
+$koneksi = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "db_akademik"
+);
 
 if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
