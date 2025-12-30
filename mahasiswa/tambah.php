@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil data dari form dan bersihkan dari karakter berbahaya
     $nim = mysqli_real_escape_string($koneksi, $_POST['nim']);
     $nama_mhs = mysqli_real_escape_string($koneksi, $_POST['nama_mhs']);
+    $program_studi = mysqli_real_escape_string($koneksi, $_POST['program_studi']);
     $tgl_lahir = mysqli_real_escape_string($koneksi, $_POST['tgl_lahir']);
     $alamat = mysqli_real_escape_string($koneksi, $_POST['alamat']);
 
@@ -18,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 alert('NIM sudah terdaftar! Gunakan NIM lain.');
               </script>";
     } else {
-        $query = "INSERT INTO mahasiswa (nim, nama_mhs, tgl_lahir, alamat) 
-                  VALUES ('$nim', '$nama_mhs', '$tgl_lahir', '$alamat')";
+        $query = "INSERT INTO mahasiswa (nim, nama_mhs, program_studi, tgl_lahir, alamat) 
+                  VALUES ('$nim', '$nama_mhs', '$program_studi', '$tgl_lahir', '$alamat')";
 
         if (mysqli_query($koneksi, $query)) {
             echo "<script>
@@ -68,6 +69,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
 
                             <div class="mb-3">
+                                <label class="form-label">Program Studi<span class="text-danger">*</span></label>
+                                <select name="program_studi" class="form-control" required>
+                                    <option value="">Pilih Program Studi</option>
+                                    <option value="D1">D1</option>
+                                    <option value="D2">D2</option>
+                                    <option value="D3">D3</option>
+                                    <option value="D4">D4</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
                                 <label class="form-label">Tanggal Lahir <span class="text-danger">*</span></label>
                                 <input type="date" name="tgl_lahir" class="form-control" required
                                     max="<?php echo date('Y-m-d'); ?>">
@@ -87,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>q
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
