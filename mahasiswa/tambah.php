@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $query = mysqli_query($koneksi, "
             INSERT INTO mahasiswa 
-            (nim, nama_mhs, id_prodi, tgl_lahir, alamat)
+            (nim, nama_mhs, program_studi_id, tgl_lahir, alamat)
             VALUES 
             ('$nim', '$nama_mhs', '$id_prodi', '$tgl_lahir', '$alamat')
         ");
