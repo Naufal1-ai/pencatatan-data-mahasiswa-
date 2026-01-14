@@ -3,6 +3,17 @@ $title = "Beranda - Sistem Pencatatan Data Mahasiswa";
 include 'layout/header.php';
 ?>
 
+<?php if (isset($_SESSION['success_message'])): ?>
+    <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i>
+            <?= htmlspecialchars($_SESSION['success_message']) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+    <?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
+
 <div class="container py-4">
     <div class="mb-4">
         <h1 class="display-5 fw-bold text-primary">Sistem Pencatatan Data Mahasiswa</h1>

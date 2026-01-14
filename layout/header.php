@@ -72,6 +72,10 @@ if (
                 <span class="text-white me-3">
                     <?= htmlspecialchars($_SESSION['nama_lengkap']) ?>
                 </span>
+                <a href="<?= $base_path ?>/profile/edit.php" class="btn btn-outline-light btn-sm me-2">
+                    Edit Profile
+                </a>
+
                 <a href="<?= $base_path ?>/logout.php" class="btn btn-outline-light btn-sm">
                     Logout
                 </a>
